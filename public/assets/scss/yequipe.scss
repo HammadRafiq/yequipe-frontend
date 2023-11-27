@@ -1,0 +1,86 @@
+.home-main {
+    .section-banner {
+        background-image: url("../images/yequipe/banner-bg1.jpg");
+        background-size: cover;
+        background-position: center 70%;
+
+        .wrapper {
+            height: calc(100vh - 80px);
+        }
+    }
+
+    .section-categories {
+        .img-bg {
+            height: 400px;
+            object-fit: cover;
+            object-position: center 70%;
+        }
+
+        .category-banner {
+            position: absolute;
+            color: $white;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+        }
+    }
+
+    .section-cta {
+        background-image: url("../images/yequipe/cta-bg.jpg");
+        background-size: cover;
+        background-position: center;
+        padding: 140px 0;
+    }
+
+    .section-our-products {}
+
+    .section-our-mission {
+        background-image: url("../images/yequipe/our-mission-bg.jpg");
+        background-size: cover;
+        background-position: center 90%;
+        padding: 140px 0;
+    }
+}
+
+.left-image-page {
+    .img-single-product {
+        // max-height: 550px;
+        // width: 100%;
+        // object-fit: cover;
+    }
+}
+
+.product-box {
+    .product-box-img-main {
+        height: 410px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+#loom-companion-mv3 {
+    display: none;
+}
+
+@media (max-width: 577px) {
+    .home-main {
+        .section-categories {
+            .img-bg {
+                height: 250px;
+            }
+        }
+
+        .section-cta,
+        .section-our-mission {
+            padding: 70px 0;
+        }
+    }
+
+    .product-box {
+        .product-box-img-main {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
