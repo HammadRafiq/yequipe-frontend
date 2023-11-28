@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 import CartContext from "../../../helpers/cart";
 import ImageZoom from "../common/image-zoom";
 import { CurrencyContext } from "../../../helpers/Currency/CurrencyContext";
+import PostLoader from "../../../components/common/PostLoader";
 
 const GET_SINGLE_PRODUCTS = gql`
   query product($id: Int!) {
@@ -86,7 +87,7 @@ const LeftImagePage = ({ pathId = 1 }) => {
       <div className="collection-wrapper left-image-page">
         <Container>
           {!data || !data.product || data.product.length === 0 || loading ? (
-            "loading"
+            <PostLoader />
           ) : (
             <Row className="leftImage">
               <Col lg="1" sm="2" xs="12" className="order-down">
