@@ -1,22 +1,14 @@
 import React from "react";
 import Banner from "./layouts/Fashion/Components/Banner";
 import CollectionBanner from "./layouts/Fashion/Components/Collection-Banner";
-import TopCollection from "../components/common/Collections/Collection3";
-import Parallax from "./layouts/Fashion/Components/Parallax";
-import SpecialProducts from "../components/common/Collections/TabCollection1";
-import ServiceLayout from "../components/common/Service/service1";
-import Blog from "../components/common/Blog/blog1";
-import Instagram from "../components/common/instagram/instagram1";
-import LogoBlock from "../components/common/logo-block";
 import HeaderOne from "../components/headers/header-one";
-import { Product4 } from "../services/script";
-import Paragraph from "../components/common/Paragraph";
-import ModalComponent from "../components/common/Modal";
 import Helmet from "react-helmet";
 import MasterFooter from "../components/footers/common/MasterFooter";
 import CTA from "./layouts/Fashion/Components/CTA";
 import OurProducts from "./layouts/Fashion/Components/OurProducts";
 import OurMission from "./layouts/Fashion/Components/OurMission";
+import Activities from "./layouts/Fashion/Components/Activities";
+
 
 const Fashion = () => {
   return (
@@ -25,9 +17,14 @@ const Fashion = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/x-icon" href={"/assets/images/icon/logo.png"} />
       </Helmet>
-      <HeaderOne logoName={"logo.png"} topClass="top-header" />
-      <Banner />
+      <div style={{ position: "relative" }}>
+        <Banner />
+        <div id="sticky-wrapper" style={{ position: "absolute", top: 25, right: 25 }}>
+          <HeaderOne logoName={"logo.png"} topClass="top-header" />
+        </div>
+      </div>
       <CollectionBanner />
+      <Activities />
       <CTA />
       <OurProducts />
       <OurMission />

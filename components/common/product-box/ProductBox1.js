@@ -6,6 +6,8 @@ import CartContext from "../../../helpers/cart";
 import { CurrencyContext } from "../../../helpers/Currency/CurrencyContext";
 import MasterProductDetail from "./MasterProductDetail";
 
+const placeholderImg = "/assets/images/yequipe/placeholder-image.jpeg"
+
 const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass, productDetail, addCompare, title }) => {
   // eslint-disable-next-line
   const router = useRouter();
@@ -34,7 +36,7 @@ const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass,
 
   const clickProductDetail = () => {
     const titleProps = product.title.split(" ").join("");
-    router.push(`/product-details/${product.id}` + "-" + `${titleProps}`);
+    router.push(`/product-details/${titleProps}` + "-" + `${product._id}`);
   };
 
   const variantChangeByColor = (imgId, product_images) => {
@@ -43,7 +45,9 @@ const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass,
         setImage(data.src);
       }
     });
-  };
+  }
+
+  
   return (
     <div className="product-box product-wrap">
       <div className="img-wrapper">
@@ -52,14 +56,14 @@ const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass,
           {product.sale === true ? <span className="lable4">on sale</span> : ""}
         </div>
         <div className="front" onClick={clickProductDetail}>
-          <Media src={`${image ? image : product.images[0].src}`} className="img-fluid product-box-img-main" alt="" />
+          <Media src={`${image ? image : product?.images?.[0]?.src ?? placeholderImg}`} className="img-fluid product-box-img-main" alt="" />
         </div>
         {backImage ? (
           product.images[1] === "undefined" ? (
             "false"
           ) : (
             <div className="back" onClick={clickProductDetail}>
-              <Media src={`${image ? image : product.images[1].src}`} className="img-fluid m-auto" alt="" />
+              <Media src={`${image ? image : product?.images?.[1]?.src}`} className="img-fluid m-auto" alt="" />
             </div>
           )
         ) : (
@@ -78,7 +82,7 @@ const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass,
               <Row className="compare-modal">
                 <Col lg="12">
                   <div className="media">
-                    <Media src={`${product.variants && image ? image : product.images[0].src}`} alt="" className="img-fluid" />
+                    <Media src={`${product.variants && image ? image : product?.images?.[0]?.src ?? placeholderImg}`} alt="" className="img-fluid" />
                     <div className="media-body align-self-center text-center">
                       <h5>
                         <i className="fa fa-check"></i>Item <span>{product.title} </span>
@@ -105,7 +109,7 @@ const ProductItem = ({ product, addCart, backImage, des, addWishlist, cartClass,
           <Row>
             <Col lg="6" xs="12">
               <div className="quick-view-img">
-                <Media src={`${product.variants && image ? image : product.images[0].src}`} alt="" className="img-fluid" />
+                <Media src={`${product.variants && image ? image : product?.images?.[0]?.src ?? placeholderImg}`} alt="" className="img-fluid" />
               </div>
             </Col>
             <Col lg="6" className="rtl-text">

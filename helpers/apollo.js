@@ -12,7 +12,8 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: "https://yequipe-api.el.r.appspot.com", // Server URL (must be absolute)
+      uri: "http://localhost:4001", // Server URL (must be absolute)
+      // uri: "https://yequipe-api.el.r.appspot.com", // Server URL (must be absolute)
       credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
       fetch,
     }),

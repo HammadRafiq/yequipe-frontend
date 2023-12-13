@@ -13,53 +13,24 @@ import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 
 const GET_PRODUCTS = gql`
-  query products(
-    $type: _CategoryType!
-    $indexFrom: Int!
-    $limit: Int!
-    $color: String!
-    $brand: [String!]!
-    $sortBy: _SortBy!
-    $priceMax: Int!
-    $priceMin: Int!
-  ) {
-    products(
-      type: $type
-      indexFrom: $indexFrom
-      limit: $limit
-      color: $color
-      brand: $brand
-      sortBy: $sortBy
-      priceMax: $priceMax
-      priceMin: $priceMin
-    ) {
+  query products($indexFrom: Int) {
+    products(indexFrom: $indexFrom) {
       total
       hasMore
-      items {
-        id
-        title
-        description
-        type
-        brand
-        category
-        price
-        new
-        sale
-        stock
-        discount
-        variants {
-          id
-          sku
-          size
-          color
-          image_id
-        }
-        images {
-          image_id
-          id
-          alt
-          src
-        }
+      items{
+        _id
+    title
+    category
+    description
+    discount
+    price
+    sale
+    stock
+    title    
+    images {
+      alt
+      src
+    }
       }
     }
   }
@@ -89,21 +60,14 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
   useEffect(() => {
     const pathname = window.location.pathname;
     setUrl(pathname);
-    router.push(
-      `${pathname}?${filterContext.state}&brand=${selectedBrands}&color=${selectedColor}&size=${selectedSize}&minPrice=${selectedPrice.min}&maxPrice=${selectedPrice.max}`, undefined, { shallow: true }
-    );
+    // router.push(
+    //   `${pathname}?${filterContext.state}&brand=${selectedBrands}&color=${selectedColor}&size=${selectedSize}&minPrice=${selectedPrice.min}&maxPrice=${selectedPrice.max}`, undefined, { shallow: true }
+    // );
   }, [selectedBrands, selectedColor, selectedSize, selectedPrice]);
 
   var { loading, data, fetchMore } = useQuery(GET_PRODUCTS, {
     variables: {
-      type: selectedCategory,
-      priceMax: selectedPrice.max,
-      priceMin: selectedPrice.min,
-      color: selectedColor,
-      brand: selectedBrands,
-      sortBy: sortBy,
       indexFrom: 0,
-      limit: limit,
     },
   });
 
@@ -219,7 +183,7 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
                       <div className="search-count">
                         <h5>
                           {data
-                            ? `Showing Products 1-${data.products.items.length} of ${data.products.total}`
+                            ? `Showing Products 1-${data?.products?.items?.length} of ${data?.products?.total}`
                             : "loading"}{" "}
                           Result
                         </h5>
@@ -293,49 +257,23 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
               <div className={`product-wrapper-grid ${layout}`}>
                 <Row>
                   {/* Product Box */}
-                  {!data ||
-                    !data.products ||
-                    !data.products.items ||
-                    data.products.items.length === 0 ||
-                    loading ? (
-                    data &&
-                      data.products &&
-                      data.products.items &&
-                      data.products.items.length === 0 ? (
-                      <Col xs="12">
-                        <div>
-                          <div className="col-sm-12 empty-cart-cls text-center">
-                            <img
-                              src={`/assets/images/empty-search.jpg`}
-                              className="img-fluid mb-4 mx-auto"
-                              alt=""
-                            />
-                            <h3>
-                              <strong>Your Cart is Empty</strong>
-                            </h3>
-                            <h4>Explore more shortlist some items.</h4>
-                          </div>
-                        </div>
-                      </Col>
-                    ) : (
-                      <div className="row mx-0 margin-default mt-4">
-                        <div className="col-xl-3 col-lg-4 col-6">
-                          <PostLoader />
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-6">
-                          <PostLoader />
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-6">
-                          <PostLoader />
-                        </div>
-                        <div className="col-xl-3 col-lg-4 col-6">
-                          <PostLoader />
-                        </div>
+                  {loading ? (
+                    <div className="row mx-0 margin-default mt-4">
+                      <div className="col-xl-3 col-lg-4 col-6">
+                        <PostLoader />
                       </div>
-                    )
-                  ) : (
-                    data &&
-                    data.products.items.map((product, i) => (
+                      <div className="col-xl-3 col-lg-4 col-6">
+                        <PostLoader />
+                      </div>
+                      <div className="col-xl-3 col-lg-4 col-6">
+                        <PostLoader />
+                      </div>
+                      <div className="col-xl-3 col-lg-4 col-6">
+                        <PostLoader />
+                      </div>
+                    </div>
+                  ) : data?.products?.items?.length > 0 ? (
+                    data?.products?.items?.map((product, i) => (
                       <div className={grid} key={i}>
                         <div className="product">
                           <div>
@@ -358,6 +296,22 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
                         </div>
                       </div>
                     ))
+                  ) : (
+                    <Col xs="12">
+                      <div>
+                        <div className="col-sm-12 empty-cart-cls text-center">
+                          <img
+                            src={`/assets/images/empty-search.jpg`}
+                            className="img-fluid mb-4 mx-auto"
+                            alt=""
+                          />
+                          <h3>
+                            <strong>Your Cart is Empty</strong>
+                          </h3>
+                          <h4>Explore more shortlist some items.</h4>
+                        </div>
+                      </div>
+                    </Col>
                   )}
                 </Row>
               </div>

@@ -10,28 +10,18 @@ import { CurrencyContext } from "../../../helpers/Currency/CurrencyContext";
 import PostLoader from "../../../components/common/PostLoader";
 
 const GET_SINGLE_PRODUCTS = gql`
-  query product($id: Int!) {
+  query product($id: ID!) {
     product(id: $id) {
-      id
+      _id
       title
       description
-      type
-      brand
       category
       price
-      new
       sale
       discount
       stock
-      variants {
-        id
-        color
-        image_id
-        variant_id
-        size
-      }
       images {
-        image_id
+        alt
         src
       }
     }
@@ -48,7 +38,7 @@ const LeftImagePage = ({ pathId = 1 }) => {
   const slider2 = useRef();
   var { loading, data } = useQuery(GET_SINGLE_PRODUCTS, {
     variables: {
-      id: parseInt(pathId),
+      id: pathId.split("-")[1]
     },
   });
   var products = {
@@ -93,30 +83,22 @@ const LeftImagePage = ({ pathId = 1 }) => {
               <Col lg="1" sm="2" xs="12" className="order-down">
                 <Row>
                   <Slider className="slider-nav" {...productsnav} asNavFor={nav1} ref={(slider) => (slider2.current = slider)}>
-                    {data.product.variants
-                      ? data.product.images.map((vari, index) => (
-                        <div key={index}>
-                          <Media src={`${vari.src}`} key={index} alt={vari.alt} className="img-fluid" />
-                        </div>
-                      ))
-                      : ""}
+                    {data?.product?.images?.map((vari, index) => (
+                      <div key={index}>
+                        <Media src={`${vari.src}`} key={index} alt={vari.alt} className="img-fluid" />
+                      </div>
+                    ))
+                    }
                   </Slider>
                 </Row>
               </Col>
               <Col lg="5" sm="10" xs="12" className="order-up">
                 <Slider {...products} asNavFor={nav2} ref={(slider) => (slider1.current = slider)} className="product-right-slick">
-                  {data.product.variants
-                    ? data.product.images.map((vari, index) => (
-                      <div key={index}>
-                        <ImageZoom image={vari} />
-                      </div>
-                    ))
-                    : data.product.images.map((vari, index) => (
-                      <div key={index}>
-                        <h1>dhdhd</h1>
-                        <ImageZoom image={vari} />
-                      </div>
-                    ))}
+                  {data?.product?.images?.map((vari, index) => (
+                    <div key={index}>
+                      <ImageZoom image={vari} />
+                    </div>
+                  ))}
                 </Slider>
               </Col>
               <Col lg="6" className="rtl-text">

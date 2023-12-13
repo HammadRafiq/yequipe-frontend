@@ -5,9 +5,10 @@ const nextConfig = {
 
   // if you want to run with local graphQl un-comment below one and comment the above code
   env: {
-    API_URL: "https://yequipe-api.el.r.appspot.com",
+    // API_URL: "https://yequipe-api.el.r.appspot.com",
+    API_URL: "http://localhost:4001",
   },
-
+  
   reactStrictMode: true,
   webpack(config, options) {
     config.module.rules.push({

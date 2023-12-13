@@ -18,11 +18,12 @@ const DetailsWithPrice = ({ item, stickyClass, changeColorVar }) => {
   const plusQty = context.plusQty;
   const minusQty = context.minusQty;
   const quantity = context.quantity;
+  const setQuantity = context.setQuantity;
   const uniqueColor = [];
   const uniqueSize = [];
 
   const changeQty = (e) => {
-    setQuantity(parseInt(e.target.value));
+    setQuantity(parseInt(e?.target?.value));
   };
 
   return (
@@ -40,13 +41,13 @@ const DetailsWithPrice = ({ item, stickyClass, changeColorVar }) => {
           {symbol}
           {product.price - (product.price * product.discount) / 100}
         </h3>
-        {product.variants.map((vari) => {
+        {product?.variants?.map((vari) => {
           var findItem = uniqueColor.find((x) => x.color === vari.color);
           if (!findItem) uniqueColor.push(vari);
           var findItemSize = uniqueSize.find((x) => x === vari.size);
           if (!findItemSize) uniqueSize.push(vari.size);
         })}
-        {changeColorVar === undefined ? (
+        {/* {changeColorVar === undefined ? (
           <>
             {uniqueColor.some((vari) => vari.color) ? (
               <ul className="color-variant">
@@ -70,7 +71,7 @@ const DetailsWithPrice = ({ item, stickyClass, changeColorVar }) => {
               ""
             )}
           </>
-        )}
+        )} */}
         <div className="product-description border-product">
           {product.variants ? (
             <div>

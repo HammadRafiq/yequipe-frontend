@@ -49,7 +49,7 @@ const MasterCollectionBanner = ({ img, about, title, link, classes }) => {
 const CollectionBanner = () => {
   return (
     <Fragment>
-      <section className="section-categories section-b-space">
+      <section className="section-categories">
         <Container>
           <h2 className="pb-4">Yequipe product categories</h2>
           <Row className="partition2">

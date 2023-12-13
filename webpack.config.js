@@ -4,7 +4,8 @@ module.exports = {
     compress: true,
     proxy: {
       "/graphql": {
-        target: "https://yequipe-api.el.r.appspot.com",
+        target: "http://localhost:4001",
+        // target: "https://yequipe-api.el.r.appspot.com",
         secure: false,
       },
     },

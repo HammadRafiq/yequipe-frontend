@@ -810,7 +810,8 @@ button {
 .btn-outline-white {
   color: $white;
   border: 2px solid $white;
-  &:hover{
+
+  &:hover {
     border: 2px solid $white;
     color: $dark-font;
     background: $white;
@@ -1472,221 +1473,221 @@ header {
   }
 }
 
-.top-header {
-  background-color: $top-header;
+// .top-header {
+//   background-color: $top-header;
 
-  .header-contact {
-    padding: 15px 0;
+//   .header-contact {
+//     padding: 15px 0;
 
-    li {
-      color: $header-font;
-      font-size: 14px;
-      padding-right: 25px;
+//     li {
+//       color: $header-font;
+//       font-size: 14px;
+//       padding-right: 25px;
 
-      i {
-        color: var(--theme-deafult);
-        padding-left: 10px;
-        transform: rotateY(180deg);
-      }
-    }
-  }
+//       i {
+//         color: var(--theme-deafult);
+//         padding-left: 10px;
+//         transform: rotateY(180deg);
+//       }
+//     }
+//   }
 
-  .header-dropdown {
-    li {
-      cursor: pointer;
-      color: $header-font;
-      padding: 15px 25px;
-      padding-right: 20px;
-      font-size: 14px;
+//   .header-dropdown {
+//     li {
+//       cursor: pointer;
+//       color: $header-font;
+//       padding: 15px 25px;
+//       padding-right: 20px;
+//       font-size: 14px;
 
-      &:first-child {
-        padding-right: 0;
-      }
+//       &:first-child {
+//         padding-right: 0;
+//       }
 
-      &:nth-child(2) {
-        padding-right: 0;
-      }
+//       &:nth-child(2) {
+//         padding-right: 0;
+//       }
 
-      a {
-        text-transform: capitalize;
-        color: $header-font;
-      }
+//       a {
+//         text-transform: capitalize;
+//         color: $header-font;
+//       }
 
-      i {
-        padding-right: 5px;
-        transition: all 0.5s ease;
-      }
+//       i {
+//         padding-right: 5px;
+//         transition: all 0.5s ease;
+//       }
 
-      ul {
-        li {
-          padding-top: 0;
-          padding-bottom: 0;
-        }
-      }
+//       ul {
+//         li {
+//           padding-top: 0;
+//           padding-bottom: 0;
+//         }
+//       }
 
-      a {
-        i {
-          color: $header-font;
-          transition: all 0.5s ease;
-        }
+//       a {
+//         i {
+//           color: $header-font;
+//           transition: all 0.5s ease;
+//         }
 
-        &:hover {
-          i {
-            color: var(--theme-deafult);
-            transition: all 0.5s ease;
-          }
-        }
-      }
+//         &:hover {
+//           i {
+//             color: var(--theme-deafult);
+//             transition: all 0.5s ease;
+//           }
+//         }
+//       }
 
-      &:hover {
-        i {
-          color: var(--theme-deafult);
-          transition: all 0.5s ease;
-        }
-      }
-    }
+//       &:hover {
+//         i {
+//           color: var(--theme-deafult);
+//           transition: all 0.5s ease;
+//         }
+//       }
+//     }
 
-    .onhover-dropdown {
-      .onhover-show-div {
-        li {
-          padding-left: 0;
-          display: flex;
-          font-size: 15px;
-          padding-bottom: 5px;
+//     .onhover-dropdown {
+//       .onhover-show-div {
+//         li {
+//           padding-left: 0;
+//           display: flex;
+//           font-size: 15px;
+//           padding-bottom: 5px;
 
-          &:last-child {
-            padding-bottom: 0;
-          }
+//           &:last-child {
+//             padding-bottom: 0;
+//           }
 
-          a {
-            color: $font-color;
-          }
-        }
-      }
-    }
-  }
+//           a {
+//             color: $font-color;
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  &.top-header-dark {
-    background-color: $dark-font;
+//   &.top-header-dark {
+//     background-color: $dark-font;
 
-    .header-contact {
-      li {
-        color: $grey;
+//     .header-contact {
+//       li {
+//         color: $grey;
 
-        i {
-          color: $grey;
-        }
-      }
-    }
+//         i {
+//           color: $grey;
+//         }
+//       }
+//     }
 
-    .header-dropdown {
-      li {
-        color: $grey;
+//     .header-dropdown {
+//       li {
+//         color: $grey;
 
-        a {
-          color: $grey;
+//         a {
+//           color: $grey;
 
-          i {
-            color: $grey;
-          }
+//           i {
+//             color: $grey;
+//           }
 
-          &:hover {
-            i {
-              color: var(--theme-deafult);
-            }
-          }
-        }
-      }
-    }
-  }
+//           &:hover {
+//             i {
+//               color: var(--theme-deafult);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  &.top-header-dark2 {
-    background-color: $grey-dark;
+//   &.top-header-dark2 {
+//     background-color: $grey-dark;
 
-    .header-contact {
-      li {
-        color: #cecece;
+//     .header-contact {
+//       li {
+//         color: #cecece;
 
-        i {
-          color: #cecece;
-        }
-      }
-    }
+//         i {
+//           color: #cecece;
+//         }
+//       }
+//     }
 
-    .header-dropdown {
-      li {
-        color: #cecece;
+//     .header-dropdown {
+//       li {
+//         color: #cecece;
 
-        a {
-          color: #cecece;
+//         a {
+//           color: #cecece;
 
-          i {
-            color: #cecece;
-          }
+//           i {
+//             color: #cecece;
+//           }
 
-          &:hover {
-            i {
-              color: var(--theme-deafult);
-            }
-          }
-        }
-      }
-    }
-  }
+//           &:hover {
+//             i {
+//               color: var(--theme-deafult);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
 
-  &.top-header-dark3 {
-    background-color: $grey-darken;
+//   &.top-header-dark3 {
+//     background-color: $grey-darken;
 
-    .header-contact {
-      li {
-        color: $grey-link;
+//     .header-contact {
+//       li {
+//         color: $grey-link;
 
-        i {
-          color: $grey-link;
-        }
-      }
-    }
+//         i {
+//           color: $grey-link;
+//         }
+//       }
+//     }
 
-    .header-dropdown {
-      li {
-        color: $grey-link;
+//     .header-dropdown {
+//       li {
+//         color: $grey-link;
 
-        a {
-          color: $grey-link;
+//         a {
+//           color: $grey-link;
 
-          i {
-            color: $grey-link;
-          }
+//           i {
+//             color: $grey-link;
+//           }
 
-          &:hover {
-            i {
-              color: var(--theme-deafult);
-            }
-          }
-        }
-      }
-    }
-  }
-}
+//           &:hover {
+//             i {
+//               color: var(--theme-deafult);
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
-.layout3-menu {
-  .main-menu {
-    .menu-left {
-      &.around-border {
-        .navbar {
-          >a {
-            padding: 0;
-            display: block;
-          }
+// .layout3-menu {
+//   .main-menu {
+//     .menu-left {
+//       &.around-border {
+//         .navbar {
+//           >a {
+//             padding: 0;
+//             display: block;
+//           }
 
-          i {
-            font-size: 22px;
-          }
-        }
-      }
-    }
-  }
-}
+//           i {
+//             font-size: 22px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 .main-menu {
   position: relative;
@@ -1764,6 +1765,7 @@ header {
 
       li {
         padding-left: 20px;
+        margin-top: 5px;
       }
 
       .onhover-div {
@@ -10465,7 +10467,7 @@ footer {
             display: flex;
             cursor: pointer;
 
-            .bar-item{
+            .bar-item {
               width: 5px;
               height: 15px;
               background: $dark-font;
@@ -11536,6 +11538,10 @@ footer {
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    .blog-left {
+      height: 350px;
     }
 
     .blog-right {
@@ -16457,4 +16463,23 @@ video#background-video {
   min-height: 100%;
   width: auto;
   height: auto;
+}
+
+.cool-link {
+  display: inline-block;
+  color: #000;
+  text-decoration: none;
+}
+
+.cool-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #000;
+  transition: width .3s;
+}
+
+.cool-link:hover::after {
+  width: 100%;
 }

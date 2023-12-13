@@ -32,6 +32,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "isomorphic-unfetch": "^4.0.2",
     "jimp": "^0.22.7",
+    "moment": "^2.29.4",
     "next": "^13.3.0",
     "next-compose-plugins": "^2.2.1",
     "next-fonts": "^1.5.1",

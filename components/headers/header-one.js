@@ -38,6 +38,16 @@ const HeaderOne = ({
     };
   }, []);
 
+  function addScrollClass() {
+    if (document.getElementById("sticky-wrapper")?.classList)
+      document.getElementById("sticky-wrapper").classList.add("header-scroll-active")
+  }
+
+  function removeScrollClass() {
+    if (document.getElementById("sticky-wrapper")?.classList)
+      document.getElementById("sticky-wrapper").classList.remove("header-scroll-active")
+  }
+
   const handleScroll = () => {
     let number =
       window.pageXOffset ||
@@ -45,11 +55,19 @@ const HeaderOne = ({
       document.body.scrollTop ||
       0;
     if (number >= 300) {
-      if (window.innerWidth < 581)
-        document.getElementById("sticky").classList.remove("fixed");
-      else document.getElementById("sticky").classList.add("fixed");
+      if (window.innerWidth < 581) {
+        removeScrollClass()
+        document.getElementById("sticky").classList.remove("fixed")
+      }
+      else {
+        document.getElementById("sticky").classList.add("fixed")
+        addScrollClass()
+      }
     }
-    else document.getElementById("sticky").classList.remove("fixed");
+    else {
+      document.getElementById("sticky").classList.remove("fixed")
+      removeScrollClass()
+    }
   };
 
   const openNav = () => {
@@ -75,7 +93,6 @@ const HeaderOne = ({
     <div>
       <header id="sticky" className={`sticky ${headerClass}`}>
         <div className="mobile-fix-option"></div>
-
         <Container>
           <Row>
             <Col>
@@ -87,7 +104,7 @@ const HeaderOne = ({
                 </div>
                 <div className="menu-right pull-right">
                   {/*Top Navigation Bar Component*/}
-                   <NavBar />
+                  <NavBar />
 
                   <div>
                     <div className="icon-nav">
@@ -97,7 +114,7 @@ const HeaderOne = ({
                           // <></>
                           <CartContainer layout={direction} icon={cart.src} />
                         ) : (
-                          
+
                           <Cart layout={direction} icon={cart.src} />
                         )}
                       </ul>
