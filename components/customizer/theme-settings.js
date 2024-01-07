@@ -266,9 +266,7 @@ const ThemeSettings = () => {
               role="group"
               aria-label="Basic example">
               <Link href={link} className="btn new-tab-btn">
-                {/* <a > */}
                 {btnName}
-                {/* </a> */}
               </Link>
             </div>
           </div>
