@@ -111,7 +111,6 @@ const HeaderOne = ({
                       <ul>
                         {/*Header Cart Component */}
                         {direction === undefined ? (
-                          // <></>
                           <CartContainer layout={direction} icon={cart.src} />
                         ) : (
 

@@ -5,6 +5,8 @@ import { Media } from "reactstrap";
 
 const CartHeader = ({ item, symbol }) => {
   const context = useContext(CartContext);
+  const titleProps = item.title.split(" ").join("");
+
   return (
     <Fragment>
       <li>
@@ -15,7 +17,7 @@ const CartHeader = ({ item, symbol }) => {
             {/* </a> */}
           </Link>
           <div className="media-body">
-            <Link href={"/product-details/" + item.id}>
+            <Link href={`/product-details/${titleProps}` + "-" + `${item._id}`}>
               {/* <a> */}
               <h6>{item.title}</h6>
               {/* </a> */}
