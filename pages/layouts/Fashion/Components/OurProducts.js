@@ -4,9 +4,10 @@ import { Container } from 'reactstrap'
 import { Product4 } from '../../../../services/script'
 import ProductItem from '../../../../components/common/product-box/ProductBox1'
 import CartContext from '../../../../helpers/cart'
+import { gql, useQuery } from "@apollo/client";
 
 
-const data = [
+const data1 = [
     {
         "__typename": "Product",
         "id": 1,
@@ -244,15 +245,46 @@ const data = [
     }
 ]
 
+const GET_PRODUCTS = gql`
+  query products($indexFrom: Int, $limit: Int, $sort: String) {
+    products(indexFrom: $indexFrom, limit: $limit, sort: $sort) {
+      total
+      hasMore
+      items{
+        _id
+        title
+        category
+        description
+        discount
+        price
+        sale
+        stock
+        images {
+          alt
+          src
+        }
+      }
+    }
+  }
+`;
+
+
 const OurProducts = () => {
     const context = useContext(CartContext);
+
+    var { loading, data, fetchMore } = useQuery(GET_PRODUCTS, {
+        variables: {
+            indexFrom: 0,
+            limit: 4,
+        },
+    })
 
     return (
         <section className="section-our-products section-b-space">
             <Container>
                 <h2 className="pb-4 text-center">Our Products</h2>
                 <Slider {...Product4} className="product-m no-arrow">
-                    {data?.map((product, i) => (
+                    {data?.products?.items?.map((product, i) => (
                         <div key={i}>
                             <ProductItem
                                 product={product}

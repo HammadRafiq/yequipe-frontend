@@ -26,7 +26,7 @@ const DetailsWithPrice = ({ item, stickyClass, changeColorVar }) => {
 
   const changeQty = (e) => {
     setQuantity(parseInt(e?.target?.value));
-  };
+  }
 
 
   return (
@@ -34,16 +34,18 @@ const DetailsWithPrice = ({ item, stickyClass, changeColorVar }) => {
       <div className={`product-right ${stickyClass}`}>
         <Form form={form}>
           <h2> {product.title} </h2>
-          <h4>
-            <del>
-              {symbol}
-              {product.price}
-            </del>
-            <span>{product.discount}% off</span>
-          </h4>
+          {product.discount && product.discount > 0 && (
+            <h4>
+              <del>
+                {symbol}
+                {product.price}
+              </del>
+              <span>{product.discount}% off</span>
+            </h4>
+          )}
           <h3>
             {symbol}
-            {product.price - (product.price * product.discount) / 100}
+            {product.price - (product.price * (product.discount ?? 0)) / 100}
           </h3>
           <div className="product-description border-product">
             <h6 className="product-title">Select Size</h6>
