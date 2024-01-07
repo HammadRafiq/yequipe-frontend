@@ -8,6 +8,7 @@ import CartContext from "../../../helpers/cart";
 import ImageZoom from "../common/image-zoom";
 import { CurrencyContext } from "../../../helpers/Currency/CurrencyContext";
 import PostLoader from "../../../components/common/PostLoader";
+import { useRouter } from "next/router";
 
 const GET_SINGLE_PRODUCTS = gql`
   query product($id: ID!) {
@@ -28,7 +29,7 @@ const GET_SINGLE_PRODUCTS = gql`
   }
 `;
 
-const LeftImagePage = ({ pathId = 1 }) => {
+const LeftImagePage = () => {
   const context = useContext(CartContext);
   const addToCart = context.addToCart;
   const curContext = useContext(CurrencyContext);
@@ -36,11 +37,16 @@ const LeftImagePage = ({ pathId = 1 }) => {
   const [state, setState] = useState({ nav1: null, nav2: null });
   const slider1 = useRef();
   const slider2 = useRef();
+  
+  const router = useRouter();
+  const id = router.query.thumbnail_left;
+
   var { loading, data } = useQuery(GET_SINGLE_PRODUCTS, {
     variables: {
-      id: pathId.split("-")[1]
+      id: id.split("-")[1]
     },
   });
+
   var products = {
     slidesToShow: 1,
     slidesToScroll: 1,

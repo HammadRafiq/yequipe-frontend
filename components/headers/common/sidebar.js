@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Row, Col, Media } from "reactstrap";
-import fashion from "../../../public/assets/images/mega-menu/fashion.jpg";
 
 const SideBar = () => {
   const closeNav = () => {
@@ -160,7 +159,7 @@ const SideBar = () => {
                     </Col>
                     <Col xl="4">
                       <a href="#" className="mega-menu-banner">
-                        <Media src={fashion.src} alt="" className="img-fluid" />
+                        <Media src="" alt="" className="img-fluid" />
                       </a>
                     </Col>
                   </Row>

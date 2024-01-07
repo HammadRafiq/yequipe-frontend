@@ -1,7 +1,6 @@
 import React from 'react';
 import CommonLayout from '../../components/shop/common-layout';
 import LeftImagePage from './product/leftImagePage';
-// import { withApollo } from '../../helpers/apollo/apollo';
 import ProductTab from './common/product-tab';
 import ProductSection from './common/product_section';
 import { useRouter } from 'next/router';
@@ -14,7 +13,7 @@ const ThumbnailLeft = () => {
         <CommonLayout parent="home" title="product">
             <LeftImagePage pathId={id} />
             <ProductTab />
-            <ProductSection />
+            <ProductSection pathId={id} />
         </CommonLayout>
     )
 }

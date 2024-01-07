@@ -30,7 +30,7 @@ const Fashion = () => {
       <OurMission />
       <MasterFooter footerClass={`footer-light`} footerLayOut={"upper-footer"} footerSection={"small-section border-section border-top-0"} belowSection={"section-b-space light-layout"} newLatter={true} logoName={"logo2.png"} />
     </div>
-  );
-};
+  )
+}
 
 export default Fashion;

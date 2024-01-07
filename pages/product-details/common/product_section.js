@@ -7,32 +7,23 @@ import CartContext from "../../../helpers/cart";
 import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 import { useRouter } from "next/router";
+import PostLoader from "../../../components/common/PostLoader";
 
 const GET_PRODUCTS = gql`
-  query products($type: _CategoryType!, $indexFrom: Int!, $limit: Int!) {
-    products(type: $type, indexFrom: $indexFrom, limit: $limit) {
-      items {
-        id
+  query products($indexFrom: Int) {
+    products(indexFrom: $indexFrom) {
+      total
+      hasMore
+      items{
+        _id
         title
-        description
-        type
-        brand
         category
-        price
-        new
-        stock
-        sale
+        description
         discount
-        variants {
-          id
-          sku
-          size
-          color
-          image_id
-        }
+        price
+        sale
+        stock
         images {
-          image_id
-          id
           alt
           src
         }
@@ -40,6 +31,7 @@ const GET_PRODUCTS = gql`
     }
   }
 `;
+
 
 const ProductSection = () => {
   const router = useRouter();
@@ -59,13 +51,21 @@ const ProductSection = () => {
   const toggle = () => setModal(!modal);
   const uniqueTags = [];
 
+  const id = router.query.thumbnail_left;
+
+  var { loading, data } = useQuery(GET_PRODUCTS, {
+    variables: {
+      indexFrom: 0,
+    },
+  })
+
   const changeQty = (e) => {
     setQuantity(parseInt(e.target.value));
   };
 
   const clickProductDetail = (product) => {
     const titleProps = product.title.split(" ").join("");
-    router.push(`/product-details/${product.id}` + "-" + `${titleProps}`);
+    router.push(`/product-details/${titleProps}` + "-" + `${product._id}`);
   };
 
   const getSelectedProduct = (item) => {
@@ -90,74 +90,89 @@ const ProductSection = () => {
           </Col>
         </Row>
         <Row className="search-product">
-          {!data ||
-            !data.products ||
-            data.products.items.length === 0 ||
+          {
             loading ? (
-            "loading"
-          ) : (
-            <>
-              {data?.products?.items?.slice(0, 6)?.map((product, index) => (
-                <Col xl="2" md="4" sm="6" key={index}>
-                  <div
-                    className="product-box"
-                    onClick={() => clickProductDetail(product)}
-                  >
-                    <div className="img-wrapper">
-                      <div className="front">
-                        <a href={null}>
-                          <Media
-                            src={product.images[0].src}
-                            className="img-fluid blur-up lazyload bg-img"
-                            alt=""
-                            style={{ height: "280px", objectFit: "cover", width: "100%" }}
-                          />
-                        </a>
-                      </div>
-                      <div className="back">
-                        <a href={null}>
-                          <Media
-                            src={product.images[1].src}
-                            className="img-fluid blur-up lazyload bg-img"
-                            alt=""
-                            style={{ height: "280px", objectFit: "cover", width: "100%" }}
-                          />
-                        </a>
-                      </div>
-                      <div className="cart-info cart-wrap">
-                        <button
-                          data-toggle="modal"
-                          data-target="#addtocart"
-                          title="Add to cart"
-                          onClick={() => addToCart(product, quantity)}
+              <div className="row mx-0 margin-default mt-2">
+                <div className="col-xl-3 col-lg-4 col-6">
+                  <PostLoader />
+                </div>
+                <div className="col-xl-3 col-lg-4 col-6">
+                  <PostLoader />
+                </div>
+                <div className="col-xl-3 col-lg-4 col-6">
+                  <PostLoader />
+                </div>
+                <div className="col-xl-3 col-lg-4 col-6">
+                  <PostLoader />
+                </div>
+              </div>
+            ) : (
+              <>
+                {
+                  data?.products?.items
+                    ?.filter(product => product._id !== id.split("-")[1]) // Getting rid of current product against which the related products are being fetched
+                    ?.slice(0, 6)
+                    ?.map((product, index) => (
+                      <Col xl="2" md="4" sm="6" key={index}>
+                        <div
+                          className="product-box"
+                          onClick={() => clickProductDetail(product)}
                         >
-                          <i className="fa fa-shopping-cart"></i>
-                        </button>
-                        <a
-                          href="#"
-                          onClick={() => getSelectedProduct(product)}
-                          data-toggle="modal"
-                          data-target="#quick-view"
-                          title="Quick View"
-                        >
-                          <i className="fa fa-search" aria-hidden="true"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="product-detail">
-                      <a href={null}>
-                        <h6>{product.title}</h6>
-                      </a>
-                      <h4>
-                        {symbol}
-                        {product.price}
-                      </h4>
-                    </div>
-                  </div>
-                </Col>
-              ))}
-            </>
-          )}
+                          <div className="img-wrapper">
+                            <div className="front">
+                              <a href={null}>
+                                <Media
+                                  src={product?.images?.[0]?.src}
+                                  className="img-fluid blur-up lazyload bg-img"
+                                  alt=""
+                                  style={{ height: "280px", objectFit: "cover", width: "100%" }}
+                                />
+                              </a>
+                            </div>
+                            <div className="back">
+                              <a href={null}>
+                                <Media
+                                  src={product?.images?.[1]?.src}
+                                  className="img-fluid blur-up lazyload bg-img"
+                                  alt=""
+                                  style={{ height: "280px", objectFit: "cover", width: "100%" }}
+                                />
+                              </a>
+                            </div>
+                            <div className="cart-info cart-wrap">
+                              <button
+                                data-toggle="modal"
+                                data-target="#addtocart"
+                                title="Add to cart"
+                                onClick={() => addToCart(product, quantity)}
+                              >
+                                <i className="fa fa-shopping-cart"></i>
+                              </button>
+                              <a
+                                href="#"
+                                onClick={() => getSelectedProduct(product)}
+                                data-toggle="modal"
+                                data-target="#quick-view"
+                                title="Quick View"
+                              >
+                                <i className="fa fa-search" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          </div>
+                          <div className="product-detail">
+                            <a href={null}>
+                              <h6>{product.title}</h6>
+                            </a>
+                            <h4>
+                              {symbol}
+                              {product.price}
+                            </h4>
+                          </div>
+                        </div>
+                      </Col>
+                    ))}
+              </>
+            )}
         </Row>
         {selectedProduct ? (
           <Modal

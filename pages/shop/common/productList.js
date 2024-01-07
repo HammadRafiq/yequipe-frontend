@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Media, Button, Spinner } from "reactstrap";
-import Menu2 from "../../../public/assets/images/mega-menu/2.jpg";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 import FilterContext from "../../../helpers/filter/FilterContext";
@@ -12,25 +11,25 @@ import CartContext from "../../../helpers/cart";
 import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
 
+
 const GET_PRODUCTS = gql`
-  query products($indexFrom: Int) {
-    products(indexFrom: $indexFrom) {
+  query products($indexFrom: Int, $limit: Int, $sort: String) {
+    products(indexFrom: $indexFrom, limit: $limit, sort: $sort) {
       total
       hasMore
       items{
         _id
-    title
-    category
-    description
-    discount
-    price
-    sale
-    stock
-    title    
-    images {
-      alt
-      src
-    }
+        title
+        category
+        description
+        discount
+        price
+        sale
+        stock
+        images {
+          alt
+          src
+        }
       }
     }
   }
@@ -68,8 +67,10 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
   var { loading, data, fetchMore } = useQuery(GET_PRODUCTS, {
     variables: {
       indexFrom: 0,
+      limit: limit,
+      sort: sortBy
     },
-  });
+  })
 
   const handlePagination = () => {
     setIsLoading(true);
@@ -246,8 +247,7 @@ const ProductList = ({ colClass, layoutList, openSidebar, noSidebar }) => {
                           <option value="HighToLow">High To Low</option>
                           <option value="LowToHigh">Low To High</option>
                           <option value="Newest">Newest</option>
-                          <option value="AscOrder">Asc Order</option>
-                          <option value="DescOrder">Desc Order</option>
+                          <option value="Oldest">Oldest</option>
                         </select>
                       </div>
                     </div>

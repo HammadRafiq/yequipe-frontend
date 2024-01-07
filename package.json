@@ -1,5 +1,5 @@
 {
-  "name": "multikart-next",
+  "name": "yequipe-next",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -23,6 +23,7 @@
     "@types/reactstrap": "^8.7.1",
     "@zeit/next-typescript": "^1.1.1",
     "animate.css": "^4.1.1",
+    "antd": "^5.12.2",
     "apexcharts": "^3.39.0",
     "bootstrap": "^5.2.3",
     "bootstrap-scss": "^5.2.3",

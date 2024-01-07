@@ -39,16 +39,10 @@ const legalLinks = [
 ]
 
 const MasterFooter = ({
-  containerFluid,
   logoName,
-  layoutClass,
   footerClass,
-  footerLayOut,
-  footerSection,
   belowSection,
   belowContainerFluid,
-  CopyRightFluid,
-  newLatter,
 }) => {
   const [isOpen, setIsOpen] = useState();
   const [collapse, setCollapse] = useState(0);
